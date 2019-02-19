@@ -32,7 +32,7 @@ func main() {
 		log.Fatal("-output is required.")
 	}
 
-	var paths map[string]struct{}
+	paths := make(map[string]struct{})
 	for _, g := range flag.Args() {
 		fmt.Println(g)
 		matches, err := filepath.Glob(g)
@@ -43,13 +43,11 @@ func main() {
 			paths[m] = struct{}{}
 		}
 	}
-	fmt.Println(paths)
 
 	for path := range paths {
 		path = strings.TrimPrefix(path, trimPath)
 		dt.Paths = append(dt.Paths, path)
 	}
-	fmt.Println(dt)
 
 	file, err := os.Create(output)
 	if err != nil {
