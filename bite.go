@@ -82,6 +82,5 @@ package {{ .Pkg }}
 
 var {{ .Var }} = map[string][]byte{
 	{{range $path, $name := .Paths }}"{{ $name }}": {{ content $path }},
-	{{ end }}
-}
+{{ end }}}
 `
